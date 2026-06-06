@@ -41,3 +41,25 @@ Sistemin kararlılığı ve gereksinimleri tam karşılaması için yerel ortamd
 | **2** | Rol Yetki Sınırları | `User` rolündeki bir üyenin `/admin/*` url'lerine eriştiğinde `unauthorized` hatası alıp ana sayfaya yönlendirilmesi. | **🟢 BAŞARILI** |
 | **3** | Stok Kısıt Doğrulaması | Envanter stok sınırını aşan sepet güncellemelerinin engellenmesi ve Türkçe hata bildirimi basılması. | **🟢 BAŞARILI** |
 | **4** | Hesap Dondurma | `is_active = false` olan üyelerin giriş denemelerinin engellenmesi ve ekrana uyarı verilmesi. | **🟢 BAŞARILI** |
+## 🔄 İşlevsel Akış Diyagramları
+
+### 1. DB Transaction Destekli Sipariş İptali ve İade Akış Şeması
+Bu şema, bir sipariş iptal edildiğinde veritabanı seviyesinde tutarsızlık oluşmasını engellemek için tüm adımların tek bir işlem bütünlüğü (Transaction) içinde nasıl işlendiğini göstermektedir.
+
+```mermaid
+graph TD
+    A([Cancel Button Clicked]) --> B{Is Status 'Pending'?}
+    B -- No --> C[⚠️ Show Error: Approved Orders Cannot Be Cancelled]
+    B -- Yes --> D[⚙️ Start DB::beginTransaction]
+    
+    D --> E[1. Update Order Status to 'Cancelled']
+    E --> F[2. Loop Items: Product->stock += quantity]
+    F --> G[3. Refund: User->balance += total_price]
+    G --> H[4. Log: Write BalanceTransaction]
+    
+    H --> I{Did All Steps Succeed?}
+    I -- Yes --> J[💾 DB::commit - Changes Saved]
+    I -- No --> K[🚨 DB::rollBack - Undo All Changes]
+    
+    J --> L([🔄 Order Successfully Cancelled])
+    K --> M([❌ Cancellation Failed - Data Secure])
