@@ -30,64 +30,14 @@ Projede Laravel 11'in sunduğu modern Model-View-Controller (MVC) mimari deseni 
 * **Model:** Veritabanındaki tabloları temsil eden Eloquent sınıflarıdır (`User`, `Product`, `Cart`, `Order`, `OrderItem`, `BalanceTransaction`).
 * **View:** Kullanıcıya sunulan arayüzleri oluşturan Türkçe Blade şablonlarıdır.
 * **Controller:** İstekleri karşılayan, iş mantığını ve algoritmaları işleyen denetleyici sınıflarıdır (`AuthController`, `ProductController`, `CartController`, `OrderController`, `AdminController`).
-erDiagram
-    USER ||--o{ ORDER : "hasMany (1-n)"
-    USER ||--o{ BALANCE_TRANSACTION : "hasMany (1-n)"
-    ORDER ||--|{ ORDER_ITEM : "hasMany (1-n)"
-    ORDER_ITEM }|--|| PRODUCT : "belongsTo (n-1)"
-    
-    USER {
-        int id PK
-        string name
-        string email
-        decimal balance
-        boolean is_active
-    }
-    PRODUCT {
-        int id PK
-        string title
-        int stock
-        decimal price
-    }
-    ORDER {
-        int id PK
-        int user_id FK
-        decimal total_price
-        string status
-    }
-    ORDER_ITEM {
-        int id PK
-        int order_id FK
-        int product_id FK
-        int quantity
-        decimal price
-    }
-    BALANCE_TRANSACTION {
-        int id PK
-        int user_id FK
-        decimal amount
-        string type
-    }graph TD
-    Start([🏁 Ödeme İsteği Başladı]) --> CheckBalance{Kullanıcı Bakiyesi >= Toplam Tutar?}
-    CheckBalance -- Evet --> PayWithBalance[Hediye Bakiyesi Kullanılır]
-    PayWithBalance --> SetCardZero[Kredi Kartı Ödemesi = 0]
-    PayWithBalance --> DeductBalance[Kullanıcı Bakiyesinden Düşülür]
-    
-    CheckBalance -- Hayır --> SplitPay[Tüm Mevcut Bakiye Kullanılır]
-    SplitPay --> CalcCard[Kredi Kartı Ödemesi = Toplam Tutar - Mevcut Bakiye]
-    SplitPay --> SetBalanceZero[Kullanıcı Bakiyesi = 0]
-    
-    DeductBalance --> SaveUser[💾 Kullanıcı Verisi Kaydedilir]
-    SetBalanceZero --> SaveUser
-    SaveUser --> End([🏁 Ödeme Tamamlandı])// Fiyat ve Bakiye Karşılaştırma Mantığı
-if ($user->balance >= $totalPrice) {
-    $balanceUsed = $totalPrice;
-    $cardPaid = 0;
-    $user->balance -= $totalPrice;
-} else {
-    $balanceUsed = $user->balance;
-    $cardPaid = $totalPrice - $user->balance;
-    $user->balance = 0;
-}
-$user->save();#Test SenaryosuBeklenen DavranışSonuç1MySQL Veri Entegrasyonumigrate:fresh --seed komutu ile tüm tabloların hatasız oluşması ve test verilerinin yüklenmesi.BAŞARILI2Rol Yetki SınırlarıUser rolündeki bir üyenin /admin/* url'lerine eriştiğinde unauthorized hatası alıp ana sayfaya yönlendirilmesi.BAŞARILI3Stok Kısıt DoğrulamasıEnvanter stok sınırını aşan sepet güncellemelerinin engellenmesi ve Türkçe hata bildirimi basılması.BAŞARILI4Hesap Dondurmais_active = false olan üyelerin giriş denemelerinin engellenmesi ve ekrana uyarı verilmesi.BAŞARILI📝 Sonuç
-Bu projede, endüstriyel asansör yedek parça tedarik sektörüne yönelik, modern web standartlarında zengin arayüzlü bir e-ticaret portalı tasarlanmış ve başarıyla uygulanmıştır. PHP ve XAMPP MySQL entegrasyonu sayesinde taşınabilirliği en üst düzeyde tutulmuştur. Laravel framework'ünün sağladığı MVC yapısı kod okunabilirliğini ve bakım kolaylığını artırmıştır. Geliştirilen bakiye bölüşüm ve işlemsel sipariş iptal algoritmaları, web programlama dersi isterlerinin tamamını akademik ve teknik açılardan kusursuz şekilde karşılamıştır.
+Dondurmais_active = false olan üyelerin giriş denemelerinin engellenmesi ve ekrana uyarı verilmesi.BAŞARILI📝 Sonuç
+Bu projede, endüstriyel asansör yedek parça tedarik sektörüne yönelik, modern web standartlarında zengin arayüzlü bir e-ticaret portalı tasarlanmış ve başarıyla uygulanmıştır. PHP ve XAMPP MySQL entegrasyonu sayesinde taşınabilirliği en üst düzeyde tutulmuştur. Laravel framework'ünün sağladığı MVC yapısı kod okunabilirliğini ve bakım kolaylığını artırmıştır. Geliştirilen bakiye bölüşüm ve işlemsel sipariş iptal algoritmaları, web programlama dersi isterlerinin tamamını akademik ve teknik açılardan kusursuz şekilde karşılamıştır.## 🧪 Doğrulama ve Test Edilebilirlik
+
+Sistemin kararlılığı ve gereksinimleri tam karşılaması için yerel ortamda kapsamlı doğrulama testleri yürütülmüştür:
+
+| # | Test Senaryosu | Beklenen Davranış | Sonuç |
+| :---: | :--- | :--- | :---: |
+| **1** | MySQL Veri Entegrasyonu | `migrate:fresh --seed` komutu ile tüm tabloların hatasız oluşması ve test verilerinin yüklenmesi. | **🟢 BAŞARILI** |
+| **2** | Rol Yetki Sınırları | `User` rolündeki bir üyenin `/admin/*` url'lerine eriştiğinde `unauthorized` hatası alıp ana sayfaya yönlendirilmesi. | **🟢 BAŞARILI** |
+| **3** | Stok Kısıt Doğrulaması | Envanter stok sınırını aşan sepet güncellemelerinin engellenmesi ve Türkçe hata bildirimi basılması. | **🟢 BAŞARILI** |
+| **4** | Hesap Dondurma | `is_active = false` olan üyelerin giriş denemelerinin engellenmesi ve ekrana uyarı verilmesi. | **🟢 BAŞARILI** |
