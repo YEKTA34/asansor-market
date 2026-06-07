@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: asansor-market
+    env: docker
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "true"
+      - key: APP_KEY
+        value: base64:+ydgrhOiRx0VeZ768NW6+UuQGHJHf/yqCy9QemIHX3c=
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/html/database/database.sqlite
