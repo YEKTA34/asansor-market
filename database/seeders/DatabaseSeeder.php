@@ -269,7 +269,31 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $imageMap = [
+            'Asansör Motoru 5.5 kW Dişlisiz (Gearless)' => 'uploads/products/1779654283_asansor-motoru-55-kw-dislisiz-gearless.jpg',
+            'VVVF Entegre Asansör Kumanda Panosu' => 'uploads/products/1779654294_vvvf-entegre-asansor-kumanda-panosu.jpg',
+            'Asansör Çelik Halat 10mm (100 Metre Rulo)' => 'uploads/products/1779654303_asansor-celik-halat-10mm-100-metre-rulo.jpg',
+            'Lüks Paslanmaz Kat Buton Paneli (Kat COP)' => 'uploads/products/1779654325_luks-paslanmaz-kat-buton-paneli-kat-cop.jpg',
+            'Kabin Boy Buton Paneli (COP - Boy Kaset)' => 'uploads/products/1779654333_kabin-boy-buton-paneli-cop-boy-kaset.jpg',
+            'Asansör Hız Regülatörü (Çift Yönlü)' => 'uploads/products/1779654344_asansor-hiz-regulatoru-cift-yonlu.jpg',
+            'Mekanik Kayma Fren Blokları (Paraşüt Fren)' => 'uploads/products/1779654357_mekanik-kayma-fren-bloklari-parasut-fren.jpg',
+            'Hidrolik Asansör Tamponu (Yaylı/Yağlı Tip)' => 'uploads/products/1779654367_hidrolik-asansor-tamponu-yayliyagli-tip.jpg',
+            'Otomatik Kabin Kapısı Kilidi' => 'uploads/products/1779654377_otomatik-kabin-kapisi-kilidi.jpg',
+            'Teleskopik Otomatik Kat Kapısı Mekanizması' => 'uploads/products/1779654393_teleskopik-otomatik-kat-kapisi-mekanizmasi.jpg',
+            'Asansör Rayı Kılavuz (T90/B - 5 Metre)' => 'uploads/products/1779654409_asansor-rayi-kilavuz-t90b-5-metre.jpg',
+            'Asansör Karşı Ağırlık Rayı (T50/A - 5 Metre)' => 'uploads/products/1779654419_asansor-karsi-agirlik-rayi-t50a-5-metre.jpg',
+            'Ray Konsolu Sacı (Ayarlanabilir Tip)' => 'uploads/products/1779654430_ray-konsolu-saci-ayarlanabilir-tip.jpg',
+            'Asansör Kabin Pateni (Poliamid 100mm)' => 'uploads/products/1779654439_asansor-kabin-pateni-poliamid-100mm.jpg',
+            'Asansör Aşırı Yük Sensörü (Yük Hücresi)' => 'uploads/products/1779654449_asansor-asiri-yuk-sensoru-yuk-hucresi.jpg',
+            'Manyetik Şalter (Kuyu Sınır Okuyucu)' => 'uploads/products/1779654463_manyetik-salter-kuyu-sinir-okuyucu.jpg',
+            'Lüks Kabin Aydınlatma LED Tavan Paneli' => 'uploads/products/1779654474_luks-kabin-aydinlatma-led-tavan-paneli.jpg',
+            'Kabin Havalandırma Fanı (Salyangoz Fan)' => 'uploads/products/1779654547_kabin-havalandirma-fani-salyangoz-fan.jpg',
+            'Dikey Boy Fotosel Seti (Boy Fotosel)' => 'uploads/products/1779654656_dikey-boy-fotosel-seti-boy-fotosel.jpg',
+            'Kurtarma Akü Grubu ve UPS Sistemi' => 'uploads/products/1779654709_kurtarma-aku-grubu-ve-ups-sistemi.jpg',
+        ];
+
         foreach ($products as $p) {
+            $p['image_path'] = $imageMap[$p['name']] ?? null;
             Product::create($p);
         }
     }

@@ -278,3 +278,25 @@ INSERT INTO `users` VALUES (1,'Yönetici Cengiz','admin@asansormarket.com',NULL,
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
+-- Product image paths update
+UPDATE `products` SET `image_path` = 'uploads/products/1779654283_asansor-motoru-55-kw-dislisiz-gearless.jpg' WHERE `id` = 1;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654294_vvvf-entegre-asansor-kumanda-panosu.jpg' WHERE `id` = 2;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654303_asansor-celik-halat-10mm-100-metre-rulo.jpg' WHERE `id` = 3;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654325_luks-paslanmaz-kat-buton-paneli-kat-cop.jpg' WHERE `id` = 4;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654333_kabin-boy-buton-paneli-cop-boy-kaset.jpg' WHERE `id` = 5;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654344_asansor-hiz-regulatoru-cift-yonlu.jpg' WHERE `id` = 6;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654357_mekanik-kayma-fren-bloklari-parasut-fren.jpg' WHERE `id` = 7;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654367_hidrolik-asansor-tamponu-yayliyagli-tip.jpg' WHERE `id` = 8;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654377_otomatik-kabin-kapisi-kilidi.jpg' WHERE `id` = 9;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654393_teleskopik-otomatik-kat-kapisi-mekanizmasi.jpg' WHERE `id` = 10;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654409_asansor-rayi-kilavuz-t90b-5-metre.jpg' WHERE `id` = 11;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654419_asansor-karsi-agirlik-rayi-t50a-5-metre.jpg' WHERE `id` = 12;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654430_ray-konsolu-saci-ayarlanabilir-tip.jpg' WHERE `id` = 13;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654439_asansor-kabin-pateni-poliamid-100mm.jpg' WHERE `id` = 14;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654449_asansor-asiri-yuk-sensoru-yuk-hucresi.jpg' WHERE `id` = 15;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654463_manyetik-salter-kuyu-sinir-okuyucu.jpg' WHERE `id` = 16;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654474_luks-kabin-aydinlatma-led-tavan-paneli.jpg' WHERE `id` = 17;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654547_kabin-havalandirma-fani-salyangoz-fan.jpg' WHERE `id` = 18;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654656_dikey-boy-fotosel-seti-boy-fotosel.jpg' WHERE `id` = 19;
+UPDATE `products` SET `image_path` = 'uploads/products/1779654709_kurtarma-aku-grubu-ve-ups-sistemi.jpg' WHERE `id` = 20;
