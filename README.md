@@ -44,7 +44,7 @@ graph TD
     style DB fill:#5bc0de,stroke:#333,stroke-width:2px
     style Controller fill:#5cb85c,stroke:#333,stroke-width:2px
 
-```mermaid
+
 
 graph TD
     A(["Iptal Butonuna Basildi"]) --> B{"Siparis Durumu 'Pending' mi?"}
