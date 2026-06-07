@@ -43,3 +43,19 @@ graph TD
     style Client fill:#f9f,stroke:#333,stroke-width:2px
     style DB fill:#5bc0de,stroke:#333,stroke-width:2px
     style Controller fill:#5cb85c,stroke:#333,stroke-width:2px
+```graph TD
+    A(["Iptal Butonuna Basildi"]) --> B{"Siparis Durumu 'Pending' mi?"}
+    B -- Hayir --> C["⚠️ Hata: Onaylanmis Siparis Iptal Edilemez"]
+    B -- Evet --> D["⚙️ DB::beginTransaction Baslat"]
+    
+    D --> E["1. Siparis Durumunu 'Cancelled' Yap"]
+    E --> F["2. Dongu: Urun Stoklarini Geri Yukle"]
+    F --> G["3. Iade: Toplam Tutari Kullanici Bakiyesine Ekle"]
+    G --> H["4. Log: BalanceTransaction Tablosuna Yaz"]
+    
+    H --> I{"Tum Adimlar Basarili mi?"}
+    I -- Evet --> J["💾 DB::commit - Degisiklikleri Kaydet"]
+    I -- Hayir --> K["🚨 DB::rollBack - Tum Islemleri Geri Al"]
+    
+    J --> L(["🔄 Siparis Basariyla Iptal Edildi"])
+    K --> M(["❌ Iptal Basarisiz - Veri Butunlugu Korundu"])
