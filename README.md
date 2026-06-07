@@ -46,6 +46,7 @@ graph TD
 
 
 
+```mermaid
 graph TD
     A(["Iptal Butonuna Basildi"]) --> B{"Siparis Durumu 'Pending' mi?"}
     B -- Hayir --> C["⚠️ Hata: Onaylanmis Siparis Iptal Edilemez"]
